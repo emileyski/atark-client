@@ -1,0 +1,107 @@
+@import url(./_fonts.scss);
+@import url(./reset.scss);
+html {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  --color-background: #ffffff;
+  --color-foreground: #1e1e1e;
+  font-family: Source Sans Pro, sans-serif;
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+}
+
+body.dark {
+  --color-background: #252c48;
+  --color-foreground: #fdfdfd;
+  a {
+    color: #fff;
+  }
+}
+
+::placeholder {
+  font-family: Source Sans Pro, sans-serif;
+}
+
+:disabled {
+  opacity: 0.5;
+}
+
+img,
+a,
+button {
+  user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --h3: Montserrat;
+  --font-roboto: Roboto;
+  /* font sizes */
+  --h3-size: 24px;
+  --btn-text-size: 14px;
+  --h4-size: 20px;
+  --h1-size: 58px;
+  --font-size-mini: 15px;
+  --h2-size: 40px;
+  /* Colors */
+  --color-azure: #f3fffd;
+  --secondary-color-1: #00cca6;
+  --light-background-color: #fff;
+  --text-color: #252b42;
+  --color-gray: rgba(0, 0, 0, 0.5);
+  --second-text-color: #737373;
+  --primary-color: #23a6f0;
+  --color-whitesmoke: #f9f9f9;
+  --color-gainsboro-100: #e6e6e6;
+  --color-gainsboro-200: #ddd;
+  /* Gaps */
+  --gap-61xl: 80px;
+  --gap-11xl: 30px;
+  --gap-3xs: 10px;
+  --gap-21xl: 40px;
+  --gap-26xl: 45px;
+  --gap-mini: 15px;
+  --gap-31xl: 50px;
+  --gap-206xl: 225px;
+  /* Paddings */
+  --padding-61xl: 80px;
+  --padding-16xl: 35px;
+  --padding-21xl: 40px;
+  --padding-mini: 15px;
+  --padding-17xl: 36px;
+  --padding-6xl: 25px;
+  --padding-31xl: 50px;
+  /* Border radiuses */
+  --br-6xl: 25px;
+  --br-18xl: 37px;
+  --br-8xs: 5px;
+  --br-12xs: 1px;
+  --br-181xl: 200px;
+  /* Effects */
+  --accentued-drop-shadow: 0px 13px 19px rgba(0, 0, 0, 0.07);
+}

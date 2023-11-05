@@ -1,0 +1,380 @@
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-200px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.background,
+.filter,
+.icon {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+
+.icon {
+  width: calc(100% + 70px);
+  right: -70px;
+  left: 0;
+  max-width: 100%;
+  height: 877px;
+  object-fit: cover;
+}
+
+.background,
+.filter {
+  width: 100%;
+  right: -35px;
+  left: 35px;
+  height: 929px;
+}
+
+.filter {
+  top: -86px;
+  right: 0;
+  left: 0;
+  background-color: var(--color-gray);
+  height: 928px;
+}
+
+.navbarToggler,
+.navbarTogglerIcon {
+  position: absolute;
+  width: 24px;
+  height: 13.7px;
+}
+
+.navbarTogglerIcon {
+  top: 0;
+  left: calc(50% - 12px);
+}
+
+.navbarToggler {
+  top: 39px;
+  left: 1298px;
+  overflow: hidden;
+  display: none;
+}
+
+.btnText,
+.btnText1 {
+  position: relative;
+  font-size: var(--btn-text-size);
+  letter-spacing: 0.2px;
+  line-height: 22px;
+  font-family: var(--h3);
+  color: var(--light-text-color);
+}
+
+.btnText {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  font-weight: 700;
+  text-align: right;
+  display: inline-block;
+}
+
+.btnText1 {
+  text-align: left;
+}
+
+.icnArrowRightIcnXs {
+  position: relative;
+  width: 12px;
+  height: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.buttonbtnprimaryColor,
+.navbarNav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.buttonbtnprimaryColor {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-mini) var(--padding-6xl);
+  background-color: var(--secondary-color-1);
+  border-radius: var(--br-8xs);
+  overflow: hidden;
+  gap: var(--gap-mini);
+}
+
+.navbarNav {
+  position: absolute;
+  top: calc(50% - 26px);
+  right: 0;
+  gap: var(--gap-26xl);
+}
+
+.collapseNavbarCollapse {
+  position: absolute;
+  top: 16px;
+  left: calc(50% - 297px);
+  width: 815px;
+  height: 58px;
+  overflow: hidden;
+}
+
+.icon1 {
+  position: absolute;
+  top: 15px;
+  left: 60px;
+  width: 270px;
+  height: 73px;
+  object-fit: cover;
+}
+
+.navbarStyle2NavbarLight {
+  position: absolute;
+  width: calc(100% - 118px);
+  top: 0;
+  right: 24px;
+  left: 94px;
+  height: 91px;
+  overflow: hidden;
+}
+
+.p {
+  margin: 0;
+}
+
+.h1Headline7 {
+  line-height: 80px;
+  font-weight: 800;
+  display: inline-block;
+  width: 695px;
+}
+
+.btnText2,
+.h1Headline7,
+.h4 {
+  position: relative;
+  letter-spacing: 0.2px;
+}
+
+.h4 {
+  font-size: var(--h4-size);
+  line-height: 30px;
+  font-weight: 500;
+}
+
+.btnText2 {
+  font-size: var(--btn-text-size);
+  line-height: 22px;
+  font-family: var(--h3);
+  color: var(--light-text-color);
+  text-align: center;
+}
+
+.buttonbtnprimaryColorbtnR {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-mini) var(--padding-17xl);
+  background-color: var(--secondary-color-1);
+  border-radius: var(--br-18xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.cta,
+.mainContent,
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.mainContent,
+.row {
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mainContent {
+  width: 699px;
+  padding: var(--padding-21xl) 0;
+  box-sizing: border-box;
+  gap: var(--gap-21xl);
+}
+
+.row {
+  width: 701px;
+}
+
+.handshake11 {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  object-fit: cover;
+}
+
+.h3FeatureTitle1 {
+  position: relative;
+  letter-spacing: 0.1px;
+  line-height: 32px;
+  display: inline-block;
+  width: 285px;
+  height: 148px;
+  flex-shrink: 0;
+}
+
+.cardItem,
+.colMd4 {
+  width: 328px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.cardItem {
+  border-radius: var(--br-6xl);
+  background-color: var(--light-text-color);
+  box-shadow: var(--accentued-drop-shadow);
+  height: 254px;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: var(--padding-16xl) var(--padding-21xl);
+  box-sizing: border-box;
+  gap: var(--gap-3xs);
+}
+
+.colMd4 {
+  height: 200px;
+}
+
+.truck81 {
+  position: relative;
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.h3FeatureTitle2 {
+  position: relative;
+  letter-spacing: 0.1px;
+  line-height: 32px;
+  display: inline-block;
+  width: 241px;
+  height: 99px;
+  flex-shrink: 0;
+}
+
+.colMd41 {
+  width: 329px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.insurance31 {
+  position: relative;
+  width: 63px;
+  height: 70px;
+  object-fit: cover;
+}
+
+.h3FeatureTitle3 {
+  position: relative;
+  letter-spacing: 0.1px;
+  line-height: 32px;
+  display: inline-block;
+  width: 273px;
+  height: 98px;
+  flex-shrink: 0;
+}
+
+.cardItem2,
+.colMd42 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.cardItem2 {
+  border-radius: var(--br-6xl);
+  background-color: var(--secondary-color-1);
+  box-shadow: var(--accentued-drop-shadow);
+  width: 328px;
+  height: 254px;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: var(--padding-16xl) var(--padding-21xl);
+  box-sizing: border-box;
+  gap: var(--gap-3xs);
+}
+
+.colMd42 {
+  width: 329px;
+  height: 200px;
+  color: var(--light-text-color);
+}
+
+.container,
+.row1 {
+  display: flex;
+  align-items: center;
+}
+
+.row1 {
+  height: 201px;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--gap-11xl);
+  text-align: left;
+  font-size: var(--h3-size);
+  color: var(--text-color);
+}
+
+.container {
+  position: absolute;
+  height: calc(100% - 150px);
+  width: calc(100% - 394px);
+  top: 104px;
+  right: 162px;
+  bottom: 46px;
+  left: 232px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: var(--padding-61xl) 0;
+  box-sizing: border-box;
+  gap: var(--gap-61xl);
+}
+
+.header6 {
+  position: relative;
+  background-color: var(--color-azure);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 1133px;
+  overflow: hidden;
+  opacity: 0;
+  text-align: center;
+  font-size: var(--h1-size);
+  color: var(--light-text-color);
+  font-family: var(--h3);
+}
+
+.header6.animate {
+  animation: 1s ease 0s 1 normal forwards slide-in-left;
+}
