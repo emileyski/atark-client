@@ -16,6 +16,7 @@ const FormSignIn = () => {
     <FormContainer>
       <Form method="post">
         <FormBlock>
+          <Text color="#808080">Email</Text>
           <Input
             type="email"
             name="email"
@@ -27,6 +28,7 @@ const FormSignIn = () => {
           </Text>
         </FormBlock>
         <FormBlock>
+          <Text color="#808080">Password</Text>
           <Input
             type="password"
             name="password"
@@ -43,7 +45,7 @@ const FormSignIn = () => {
         {isLoading && <Preloader width={20} />}
         <div>
           <Text color="#808080">Don't have an account? </Text>
-          <Link to="/signup" className="link-primary">
+          <Link to="/app/signup" className="link-primary">
             Sign up
           </Link>
         </div>

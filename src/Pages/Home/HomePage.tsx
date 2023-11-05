@@ -1,7 +1,15 @@
 import { FunctionComponent, useEffect } from "react";
 import styles from "./HomePage.module.css";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const HomePage: FunctionComponent = () => {
+  const navigate = useNavigate();
+
+  const userData = useSelector((state: any) => state.user.userData);
+
+  // console.log(userData);
+
   useEffect(() => {
     const scrollAnimElements = document.querySelectorAll(
       "[data-animate-on-scroll]"
@@ -69,7 +77,7 @@ const HomePage: FunctionComponent = () => {
                   />
                   <div className={styles.h61}>
                     Только выгодные рейсы – наши перевозчики зарабатывают более
-                    200 000 рублей в год с каждой машины
+                    200 000 гривен в год с каждой машины
                   </div>
                 </div>
                 <div className={styles.featureItem2}>
@@ -176,15 +184,43 @@ const HomePage: FunctionComponent = () => {
           </div>
           <div className={styles.collapseNavbarCollapse}>
             <div className={styles.navbarNav}>
-              <button className={styles.btnText3}>Вход</button>
-              <button className={styles.buttonbtnprimaryColor3}>
-                <b className={styles.btnText4}>Регистрация</b>
-                <img
-                  className={styles.icnArrowRightIcnXs}
-                  alt=""
-                  src="/icn-arrowright-icnxs.svg"
-                />
-              </button>
+              {!userData ? (
+                <>
+                  <button
+                    onClick={() => navigate("/app/signin")}
+                    className={styles.btnText3}
+                  >
+                    Log In
+                  </button>
+                  <button
+                    onClick={() => navigate("/app/signup")}
+                    className={styles.buttonbtnprimaryColor3}
+                  >
+                    <b className={styles.btnText4}>Sign Up</b>
+                    <img
+                      className={styles.icnArrowRightIcnXs}
+                      alt=""
+                      src="/icn-arrowright-icnxs.svg"
+                    />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => navigate("/app/dashboard")}
+                    className={styles.buttonbtnprimaryColor3}
+                  >
+                    <b className={styles.btnText4}>
+                      {userData.name}, to dashboard ({userData.role})
+                    </b>
+                    <img
+                      className={styles.icnArrowRightIcnXs}
+                      alt=""
+                      src="/icn-arrowright-icnxs.svg"
+                    />
+                  </button>
+                </>
+              )}
             </div>
           </div>
           <img className={styles.icon2} alt="" src="/-2-1@2x.png" />

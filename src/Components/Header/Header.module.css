@@ -1,0 +1,81 @@
+.btnText,
+.btnText1 {
+  position: relative;
+  font-size: var(--btn-text-size);
+  letter-spacing: 0.2px;
+  line-height: 22px;
+  font-family: var(--btn-text);
+  color: var(--light-background-color);
+}
+
+.btnText {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  font-weight: 700;
+  text-align: right;
+  display: inline-block;
+}
+
+.btnText1 {
+  text-align: left;
+}
+
+.icnArrowRightIcnXs {
+  position: relative;
+  width: 12px;
+  height: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.buttonbtnprimaryColor,
+.navbarNav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.buttonbtnprimaryColor {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-mini) var(--padding-6xl);
+  background-color: var(--secondary-color-1);
+  border-radius: var(--br-8xs);
+  overflow: hidden;
+  gap: var(--gap-mini);
+}
+
+.navbarNav {
+  position: absolute;
+  top: calc(50% - 26px);
+  right: 0;
+  gap: var(--gap-26xl);
+}
+
+.collapseNavbarCollapse {
+  position: absolute;
+  top: 16px;
+  left: calc(50% - 297px);
+  width: 815px;
+  height: 58px;
+  overflow: hidden;
+}
+
+.icon {
+  position: absolute;
+  top: 15px;
+  left: 60px;
+  width: 270px;
+  height: 73px;
+  object-fit: cover;
+}
+
+.header {
+  background-color: #212121;
+  /* width: 1440px; */
+  height: 85px;
+  overflow: hidden;
+}

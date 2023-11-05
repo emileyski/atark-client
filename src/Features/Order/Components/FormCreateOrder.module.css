@@ -1,0 +1,21 @@
+/* FormCreateOrder.module.css */
+
+.container {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  height: 100%;
+}
+
+.form {
+  padding-top: 2rem;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapContainer {
+  margin: 2rem 2rem 0 0;
+  flex: 1;
+}

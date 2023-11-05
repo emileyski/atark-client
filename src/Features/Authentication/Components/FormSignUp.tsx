@@ -80,7 +80,7 @@ const FormSignUp = () => {
         {isLoading && <Preloader width={20} />}
         <div>
           <Text color="#808080">Already have an account? </Text>
-          <Link to="/signin" className="link-primary">
+          <Link to="/app/signin" className="link-primary">
             Sign in
           </Link>
         </div>
