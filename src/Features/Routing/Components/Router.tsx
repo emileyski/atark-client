@@ -7,7 +7,7 @@ import SignIn, { action as signinAction } from "@Pages/SignIn";
 import SignUp, { action as signupAction } from "@Pages/SignUp";
 import UserDashboard from "@Features/Dashboard/UserDashboard";
 import CustomerOrderList, {
-  loader as customerOrderList,
+  loader as customerOrderListLoader,
 } from "@Pages/CustomerOrderList";
 import AvailableOrders, {
   loader as availableOrdersLoader,
@@ -15,6 +15,9 @@ import AvailableOrders, {
 import CurrentOrder, {
   loader as currentOrderLoader,
 } from "@Pages/CurrentOrder";
+import DriverOrderList, {
+  loader as driverOrderListLoader,
+} from "@Pages/DriverOrderList";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -36,7 +39,12 @@ const router = createBrowserRouter([
           {
             path: "/app/dashboard/customer-orders",
             element: <CustomerOrderList />,
-            loader: customerOrderList,
+            loader: customerOrderListLoader,
+          },
+          {
+            path: "/app/dashboard/driver-orders",
+            element: <DriverOrderList />,
+            loader: driverOrderListLoader,
           },
           {
             path: "/app/dashboard/available-orders",
