@@ -18,6 +18,8 @@ import CurrentOrder, {
 import DriverOrderList, {
   loader as driverOrderListLoader,
 } from "@Pages/DriverOrderList";
+import AllUsers, { loader as allUsersLoader } from "@Pages/AllUsers";
+import UserProfile from "@Pages/UserProfile";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -55,6 +57,15 @@ const router = createBrowserRouter([
             path: "/app/dashboard/current-order",
             element: <CurrentOrder />,
             loader: currentOrderLoader,
+          },
+          {
+            path: "/app/dashboard/all-users",
+            element: <AllUsers />,
+            loader: allUsersLoader,
+          },
+          {
+            path: "/app/dashboard/profile",
+            element: <UserProfile />,
           },
         ],
       },

@@ -43,7 +43,7 @@ const Header: FunctionComponent = () => {
               )}
               {userData && (
                 <button
-                  onClick={() => navigate("/app/signup")}
+                  onClick={() => navigate("/app/dashboard/profile")}
                   className={styles.buttonbtnprimaryColor}
                 >
                   <b className={styles.btnText1}>

@@ -4,5 +4,5 @@ export interface IUser {
   email: string;
   role: string;
   createdAt: Date;
-  BirthDate: Date;
+  birthDate: Date;
 }
