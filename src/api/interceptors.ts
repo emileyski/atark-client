@@ -25,10 +25,20 @@ const getAxiosInstance = (baseUrl: string) => {
       if (error.response.status !== 200 && !originalRequest._retry) {
         originalRequest._retry = true;
 
+        const refreshToken = localStorage.getItem("refreshToken");
+
+        if (!refreshToken) return Promise.reject(error);
+
         try {
-          const refreshResponse = await axios.post(`${baseUrl}/auth/refresh`, {
-            refreshToken: localStorage.getItem("refreshToken"),
-          });
+          const refreshResponse = await axios.post(
+            `${baseUrl}/auth/refresh`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${refreshToken}`,
+              },
+            }
+          );
 
           updateTokens(
             refreshResponse.data.accessToken,
@@ -38,6 +48,16 @@ const getAxiosInstance = (baseUrl: string) => {
           return axiosInstance(originalRequest);
         } catch (refreshError) {
           // console.error("Ошибка при обновлении токена:", refreshError);
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          alert("U are not authorized, please login again");
+
+          const confirm = window.confirm("Do you want to login again?");
+          if (confirm) {
+            window.location.href = "/login";
+          } else {
+            window.location.href = "/";
+          }
         }
       }
 

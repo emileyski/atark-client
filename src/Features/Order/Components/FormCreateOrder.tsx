@@ -1,23 +1,30 @@
 // FormCreateOrder.tsx
 import React, { useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  useMapEvents,
-  Polyline,
-  Popup,
-} from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import L from "leaflet";
+
 import "leaflet/dist/leaflet.css";
 import styles from "./FormCreateOrder.module.css"; // Модульные стили
-import { Form, FormBlock, FormContainer } from "@Components/Form";
+import { Form, FormBlock } from "@Components/Form";
 import { Input } from "@Components/UI/Inputs";
 import { Text } from "@Components/UI/Labels";
 import { DarkButton } from "@Components/UI/Buttons";
 import Routing from "@Components/UI/Routing";
+import { useActionData } from "react-router-dom";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const FormCreateOrder: React.FC = () => {
+  const navigate = useNavigate();
+
+  const actionData = useActionData();
+
   const [originName, setOriginName] = useState("");
   const [destinationName, setDestinationName] = useState("");
 
@@ -29,6 +36,20 @@ const FormCreateOrder: React.FC = () => {
     latitude: 50.27,
     longitude: 30.31,
   });
+
+  const [price, setPrice] = useState(0);
+  const [distance, setDistance] = useState(0);
+  const [tariffId, setTariffId] = useState(2);
+
+  const handleCreateAnotherOrder = () => {
+    // Add logic to handle creating another order
+    window.location.reload();
+  };
+
+  const handleGoToDashboard = () => {
+    // Add logic to redirect to Dashboard
+    navigate("/app/dashboard/customer-orders");
+  };
 
   return (
     <div className={styles.container}>
@@ -73,13 +94,19 @@ const FormCreateOrder: React.FC = () => {
           </FormBlock>
           <FormBlock>
             <Text color="#808080">Tariff</Text>
-            <Input type="text" name="tariffId" placeholder="TariffId" />
+            <Input
+              type="number"
+              name="tariffId"
+              value={tariffId}
+              onChange={(e) => setTariffId(parseInt(e.target.value))}
+              placeholder="TariffId"
+            />
           </FormBlock>
           <FormBlock>
             <Text color="#808080">Distance</Text>
             <Input
               type="text"
-              name="tariffId"
+              value={`${distance.toFixed(2)} km`}
               placeholder="This field will calculated"
             />
           </FormBlock>
@@ -87,16 +114,18 @@ const FormCreateOrder: React.FC = () => {
             <Text color="#808080">Estimated price</Text>
             <Input
               type="text"
-              name="tariffId"
+              value={`${price.toFixed(2)} UAH`}
               placeholder="This field will calculated"
             />
           </FormBlock>
           <input
+            readOnly
             type="hidden"
             name="originCoordinates"
             value={JSON.stringify(originCoordinates)}
           />
           <input
+            readOnly
             type="hidden"
             name="destinationCoordinates"
             value={JSON.stringify(destinationCoordinates)}
@@ -116,8 +145,25 @@ const FormCreateOrder: React.FC = () => {
           setOriginName={setOriginName}
           setDestinationCoordinates={setDestinationCoordinates}
           setOriginCoordinates={setOriginCoordinates}
+          setPrice={setPrice}
+          setDistance={setDistance}
         />
       </MapContainer>
+
+      <Dialog open={actionData !== undefined}>
+        <DialogTitle>Order Created</DialogTitle>
+        <DialogContent>
+          <Text>Your order has been successfully created!</Text>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCreateAnotherOrder} color="primary">
+            Create Another Order
+          </Button>
+          <Button onClick={handleGoToDashboard} color="primary">
+            Go to Dashboard
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

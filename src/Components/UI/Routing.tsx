@@ -3,6 +3,7 @@ import L from "leaflet";
 import "leaflet-routing-machine/dist/leaflet-routing-machine.css";
 import "leaflet-routing-machine";
 import { useMap } from "react-leaflet";
+import axios from "axios";
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
@@ -15,6 +16,8 @@ export default function Routing({
   setDestinationName,
   setOriginCoordinates,
   setDestinationCoordinates,
+  setPrice,
+  setDistance,
 }) {
   const map = useMap();
 
@@ -76,10 +79,19 @@ export default function Routing({
     }).addTo(map);
 
     // Handle routesfound event
-    routingControl.on("routesfound", function (event) {
+    routingControl.on("routesfound", async function (event) {
       const route = event.routes[0];
       const routeLength = route.summary.totalDistance; // Distance in meters
       //   console.log("Route Length:", alert(routeLength / 1000));
+
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_API_URL}/orders/estimated-price?distance=${
+          routeLength / 1000
+        }&tariffId=2`
+      );
+
+      setPrice(res.data);
+      setDistance(routeLength / 1000);
     });
     return () => map.removeControl(routingControl);
   }, [map]);

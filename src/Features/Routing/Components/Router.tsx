@@ -1,9 +1,20 @@
 import AppLayout from "@Components/AppLayout/AppLayout";
 import CreateOrder, { action as createOrderAction } from "@Pages/CreateOrder";
-import Home from "@Pages/Home/HomePage";
-import SignIn from "@Pages/SignIn";
-import SignUp, { action as signupAction } from "@Pages/SignUp";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Dashboard from "@Pages/Dashboard";
+import Home from "@Pages/Home/HomePage";
+import SignIn, { action as signinAction } from "@Pages/SignIn";
+import SignUp, { action as signupAction } from "@Pages/SignUp";
+import UserDashboard from "@Features/Dashboard/UserDashboard";
+import CustomerOrderList, {
+  loader as customerOrderList,
+} from "@Pages/CustomerOrderList";
+import AvailableOrders, {
+  loader as availableOrdersLoader,
+} from "@Pages/AvailableOrders";
+import CurrentOrder, {
+  loader as currentOrderLoader,
+} from "@Pages/CurrentOrder";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -17,8 +28,29 @@ const router = createBrowserRouter([
         element: <CreateOrder />,
         action: createOrderAction,
       },
-
-      { path: "/app/signin", element: <SignIn /> },
+      {
+        path: "app/dashboard",
+        element: <Dashboard />,
+        children: [
+          { path: "/app/dashboard/user", element: <UserDashboard /> },
+          {
+            path: "/app/dashboard/customer-orders",
+            element: <CustomerOrderList />,
+            loader: customerOrderList,
+          },
+          {
+            path: "/app/dashboard/available-orders",
+            element: <AvailableOrders />,
+            loader: availableOrdersLoader,
+          },
+          {
+            path: "/app/dashboard/current-order",
+            element: <CurrentOrder />,
+            loader: currentOrderLoader,
+          },
+        ],
+      },
+      { path: "/app/signin", element: <SignIn />, action: signinAction },
       { path: "/app/signup", element: <SignUp />, action: signupAction },
     ],
   },
