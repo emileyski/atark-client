@@ -8,12 +8,14 @@ import {
   Button,
   Box,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { ICoordinate } from "src/Interfaces/ICoordinate";
 import { IOrder } from "src/Interfaces/IOrder";
 import { IOrderStatus } from "src/Interfaces/IOrderStatus";
 import getAxiosInstance from "src/api/interceptors";
 import { useSelector } from "react-redux";
+import ComplaintForm from "./ComplaintForm";
+import { ComplaintTypes } from "src/Enums/ComplaintTypes.enum";
 
 const handleOrderAction = async (
   id: number,
@@ -85,6 +87,41 @@ const handleShowAtMap = (coordinates: ICoordinate) => {
 
 const OrderItem: React.FC<{ order: IOrder }> = ({ order }) => {
   const userRole = useSelector((state: any) => state.user?.userData?.role);
+
+  const [isComplaintFormOpen, setComplaintFormOpen] = useState(false);
+
+  const handleOpenComplaintForm = () => {
+    setComplaintFormOpen(true);
+  };
+
+  const handleCloseComplaintForm = () => {
+    setComplaintFormOpen(false);
+  };
+
+  const handleSubmitComplaint = async (complaintData: {
+    complaintType: ComplaintTypes;
+    description: string;
+  }) => {
+    // Обработка отправки жалобы (complaintData)
+    const sure = window.confirm(
+      "Are you sure you want to submit this complaint?"
+    );
+    if (!sure) return;
+
+    try {
+      const response = await getAxiosInstance(
+        import.meta.env.VITE_APP_API_URL
+      ).post(`/orders/${order.id}/complain`, { ...complaintData });
+
+      if (response.status !== 201) {
+        alert("Failed to submit complaint");
+      } else {
+        alert("Complaint submitted successfully");
+      }
+    } catch (error) {
+      alert(error.response?.data.message || error.message);
+    }
+  };
 
   return (
     <ListItem>
@@ -219,6 +256,16 @@ const OrderItem: React.FC<{ order: IOrder }> = ({ order }) => {
                   </Button>
                 </>
               )}
+
+            {userRole !== undefined && order.currentStatus !== "COMPLETED" && (
+              <Button
+                onClick={handleOpenComplaintForm}
+                color="warning"
+                variant="contained"
+              >
+                make a complaint
+              </Button>
+            )}
           </Box>
           <Divider />
           <Typography variant="subtitle1">Status History:</Typography>
@@ -231,6 +278,11 @@ const OrderItem: React.FC<{ order: IOrder }> = ({ order }) => {
           ))}
         </CardContent>
       </Card>
+      <ComplaintForm
+        open={isComplaintFormOpen}
+        onClose={handleCloseComplaintForm}
+        onSubmit={handleSubmitComplaint}
+      />
     </ListItem>
   );
 };
