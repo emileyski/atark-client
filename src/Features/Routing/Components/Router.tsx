@@ -20,6 +20,7 @@ import DriverOrderList, {
 } from "@Pages/DriverOrderList";
 import AllUsers, { loader as allUsersLoader } from "@Pages/AllUsers";
 import UserProfile from "@Pages/UserProfile";
+import Complaints, { loader as complaintsLoader } from "@Pages/Complaints";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -66,6 +67,11 @@ const router = createBrowserRouter([
           {
             path: "/app/dashboard/profile",
             element: <UserProfile />,
+          },
+          {
+            path: "/app/dashboard/complaints",
+            element: <Complaints />,
+            loader: complaintsLoader,
           },
         ],
       },
