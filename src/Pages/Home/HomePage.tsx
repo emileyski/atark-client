@@ -47,12 +47,12 @@ const HomePage: FunctionComponent = () => {
             <div className={styles.container}>
               <div className={styles.row}>
                 <div className={styles.colMd5}>
-                  <b className={styles.h2}>Для перевозчиков</b>
+                  <b className={styles.h2}>Для перевізників</b>
                 </div>
                 <div className={styles.colMd51}>
                   <div className={styles.customFormGroupSubscribe}>
                     <button className={styles.buttonbtnprimaryColor}>
-                      <b className={styles.btnText}>Присоединяйтесь</b>
+                      <b className={styles.btnText}>Приєднуйтеся</b>
                     </button>
                   </div>
                 </div>
@@ -65,8 +65,8 @@ const HomePage: FunctionComponent = () => {
                     src="/icncircle-circlexs-secondarycolor1.svg"
                   />
                   <div className={styles.h6}>
-                    Все грузовладельцы на одной платформе – участвуйте в
-                    аукционах и тендерах, получайте выгодные заказы
+                    Усі вантажовласники на одній платформі – беріть участь у
+                    аукціони та тендери, отримуйте вигідні замовлення
                   </div>
                 </div>
                 <div className={styles.featureItem1}>
@@ -104,13 +104,13 @@ const HomePage: FunctionComponent = () => {
             <div className={styles.colMd7}>
               <b className={styles.h2}>Gruzi.ua</b>
               <div className={styles.paragraph}>
-                Это цифровая платформа для грузоперевозок. Пользователям
-                доступны продукты и сервисы для автоматизации закупки и
-                исполнения перевозок: транспортные тендеры, спот-аукционы, TMS и
-                трекинг. Цифровые продукты Gruzi.ua объединены в экосистему,
-                интегрированы с ИТ-системами грузоотправителей, позволяют
-                оптимизировать рутинные процессы и значительно снизить расходы
-                на транспортную логистику.
+                Це цифрова платформа для перевезення вантажів. Користувачам
+                доступні продукти та сервіси для автоматизації закупівлі та
+                виконання перевезень: транспортні тендери, спот-аукціони, TMS та
+                трекінг. Цифрові продукти Gruzi.ua об'єднані в екосистему,
+                інтегровані з ІТ-системами відправників вантажу, дозволяють
+                оптимізувати рутинні процеси та значно знизити витрати на
+                транспортну логістику.
               </div>
             </div>
             <div className={styles.colMd52}>
@@ -229,20 +229,20 @@ const HomePage: FunctionComponent = () => {
           <div className={styles.row3}>
             <div className={styles.mainContent1}>
               <div className={styles.h1Headline7}>
-                <p className={styles.p}>{`Цифровая платформа `}</p>
-                <p className={styles.p}>для грузоперевозок</p>
+                <p className={styles.p}>{`Цифрова платформа `}</p>
+                <p className={styles.p}>для вантажоперевезень</p>
               </div>
               <div className={styles.h4}>
                 <p className={styles.p}>
-                  Экосистема сервисов для транспортной логистики
+                  Екосистема сервісів для транспортної логістики
                 </p>
                 <p className={styles.p}>
-                  Транспортные тендеры | Спот-аукционы | TMS | Трекинг грузов
+                  Транспортні тендери Спот-аукціони | TMS | Трекінг вантажів
                 </p>
               </div>
               <div className={styles.cta}>
                 <button className={styles.buttonbtnprimaryColorbtnR}>
-                  <b className={styles.btnText}>Попробовать</b>
+                  <b className={styles.btnText}>Спробувати</b>
                 </button>
               </div>
             </div>
@@ -256,7 +256,7 @@ const HomePage: FunctionComponent = () => {
                   src="/handshake-1-1@2x.png"
                 />
                 <b className={styles.h3FeatureTitle1}>
-                  Более 6 000 перевозчиков уже работают с нами
+                  Понад 6 000 перевізників вже працюють із нами
                 </b>
               </div>
             </div>
@@ -268,7 +268,7 @@ const HomePage: FunctionComponent = () => {
                   src="/truck-8-1@2x.png"
                 />
                 <b className={styles.h3FeatureTitle2}>
-                  Свыше 100 000 рейсов в год
+                  Понад 100 000 рейсів на рік
                 </b>
               </div>
             </div>
@@ -279,9 +279,7 @@ const HomePage: FunctionComponent = () => {
                   alt=""
                   src="/insurance-3-1@2x.png"
                 />
-                <b className={styles.h3FeatureTitle3}>
-                  Своя служба безопасности
-                </b>
+                <b className={styles.h3FeatureTitle3}>Своя служба безпеки</b>
               </div>
             </div>
           </div>

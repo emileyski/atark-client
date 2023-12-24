@@ -1,4 +1,5 @@
 import { IOrderStatus } from "./IOrderStatus";
+import { ITariff } from "./ITariff";
 
 export interface IOrder {
   id: number;
@@ -18,5 +19,20 @@ export interface IOrder {
     longitude: number;
   };
 
+  tariff?: ITariff;
+
   statuses?: IOrderStatus[];
+
+  driver?: {
+    id: string;
+    name: string;
+    createdAt: string;
+    driverLicense: string;
+  };
+
+  customer?: {
+    id: string;
+    createdAt: string;
+    name: string;
+  };
 }

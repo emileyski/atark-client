@@ -1,8 +1,38 @@
 import React from "react";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 import { IUser } from "src/Interfaces/IUser";
+import getAxiosInstance from "src/api/interceptors";
 
-const UserList: React.FC<{ users: IUser[] }> = ({ users }) => {
+const UserList: React.FC = () => {
+  const [users, setUsers] = React.useState<{
+    data: IUser[];
+    total: number;
+    page: number;
+    totalPages: number;
+    perPage: number;
+  }>({
+    data: [],
+    total: 0,
+    page: 1,
+    totalPages: 0,
+    perPage: 5,
+  });
+
+  React.useEffect(() => {
+    const fetchUsers = async () => {
+      const responce = await getAxiosInstance(
+        `${import.meta.env.VITE_APP_API_URL}`
+      ).get(`/admin-panel/users?page=${users.page}&perPage=${users.perPage}`);
+
+      if (responce.status === 200) {
+        const data = await responce.data;
+        setUsers(data);
+      }
+    };
+
+    fetchUsers();
+  }, [users.page, users.perPage]);
+
   const handleBlock = (userId: string) => {
     // Implement block logic here
     console.log(`Blocked user with ID: ${userId}`);
@@ -15,7 +45,7 @@ const UserList: React.FC<{ users: IUser[] }> = ({ users }) => {
 
   return (
     <div>
-      {users.map((user) => (
+      {users.data.map((user) => (
         <Card key={user.id} sx={{ margin: "10px 0", padding: "10px" }}>
           <CardContent>
             <Typography variant="h6">{user.name}</Typography>

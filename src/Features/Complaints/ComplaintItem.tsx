@@ -20,63 +20,42 @@ import {
 } from "@mui/material";
 import { OrderStatusTypes } from "src/Enums/order-status.enum";
 import { ComplaintStatusTypes } from "src/Enums/complaint-status.enum";
+import getAxiosInstance from "src/api/interceptors";
 
-const ComplaintItem = ({ complaint }) => {
+const ComplaintItem = ({ defaulComplaint }) => {
+  const [complaint, setComplaint] = useState(defaulComplaint);
   const [showDetails, setShowDetails] = useState(false);
   const [openVerdictDialog, setOpenVerdictDialog] = useState(false);
+  const [openChangeStatusDialog, setOpenChangeStatusDialog] = useState(false);
   const [verdictDetails, setVerdictDetails] = useState({
     verdict: "",
     setOrderStatus: false,
-    orderStatus: OrderStatusTypes.CREATED, // Установите начальное значение статуса заказа
+    orderStatus: OrderStatusTypes.CREATED,
+    complaintStatus: ComplaintStatusTypes.SUBMITTED,
   });
 
-  const [showComplaintStatusDialog, setShowComplaintStatusDialog] =
-    useState(false);
+  const handleMakeVerdict = async () => {
+    try {
+      const responce = await getAxiosInstance(
+        import.meta.env.VITE_APP_API_URL
+      ).patch(`complaint/verdict`, {
+        ...verdictDetails,
+        status: verdictDetails.complaintStatus,
+        orderStatus: verdictDetails.setOrderStatus
+          ? verdictDetails.orderStatus
+          : undefined,
+      });
 
-  const handleShowDetails = () => {
-    setShowDetails(!showDetails);
-  };
-
-  const handleMakeVerdict = () => {
-    setOpenVerdictDialog(true);
-  };
-
-  const handleRejectComplaint = () => {
-    // Добавьте логику для обработки события "Отклонить жалобу"
-    console.log("Rejecting complaint:", complaint.id);
-  };
-
-  const handleVerdictDialogClose = () => {
-    setOpenVerdictDialog(false);
-  };
-
-  const handleComplaintStatusDialogClose = () =>
-    setShowComplaintStatusDialog(false);
-
-  const handleMakeVerdictConfirm = () => {
-    // Добавьте логику для обработки события "Make Verdict"
-    console.log("Making a verdict for complaint:", complaint.id);
-    console.log("Verdict Details:", verdictDetails);
-    // Здесь вы можете отправить данные на сервер или выполнить другие необходимые действия
-    setOpenVerdictDialog(false);
-  };
-
-  const handleShowChangeComplaintStatus = () => {
-    setShowComplaintStatusDialog(true);
-  };
-
-  const handleVerdictChange = (event) => {
-    setVerdictDetails({
-      ...verdictDetails,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleSetOrderStatusChange = (event) => {
-    setVerdictDetails({
-      ...verdictDetails,
-      setOrderStatus: event.target.checked,
-    });
+      if (responce.status === 200) {
+        const { data } = responce;
+        setComplaint(data);
+        setOpenVerdictDialog(false);
+      } else {
+        alert("Some error occured!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -126,28 +105,34 @@ const ComplaintItem = ({ complaint }) => {
         )}
       </CardContent>
       <CardActions>
-        <Button onClick={handleShowDetails} size="small">
+        <Button onClick={() => setShowDetails(!showDetails)} size="small">
           {showDetails ? "Hide Details" : "Show Details"}
         </Button>
-        <Button onClick={handleMakeVerdict} size="small">
+        <Button onClick={() => setOpenVerdictDialog(true)} size="small">
           Make Verdict
         </Button>
-        <Button onClick={handleShowChangeComplaintStatus}>
+        <Button
+          onClick={() => {
+            setOpenChangeStatusDialog(true);
+          }}
+        >
           Set complaint status
         </Button>
-        <Button onClick={handleRejectComplaint} size="small">
+        <Button
+          // onClick={handleRejectComplaint}
+          size="small"
+        >
           Reject Complaint
         </Button>
       </CardActions>
 
-      {/* Добавлено всплывающее окно для "Make Verdict" */}
       <Dialog
         BackdropComponent={Backdrop}
         BackdropProps={{
           sx: { backdropFilter: "blur(8px)" },
         }}
         open={openVerdictDialog}
-        onClose={handleVerdictDialogClose}
+        onClose={() => setOpenVerdictDialog(false)}
       >
         <DialogTitle>Make Verdict</DialogTitle>
         <DialogContent>
@@ -156,13 +141,20 @@ const ComplaintItem = ({ complaint }) => {
             label="Verdict"
             name="verdict"
             value={verdictDetails.verdict}
-            onChange={handleVerdictChange}
+            onChange={(e) =>
+              setVerdictDetails({ ...verdictDetails, verdict: e.target.value })
+            }
           />
           <FormControl fullWidth sx={{ mt: 2 }}>
             <InputLabel sx={{ top: "-7px" }}>Set Order Status</InputLabel>
             <Select
-              value={verdictDetails.setOrderStatus}
-              onChange={handleSetOrderStatusChange}
+              value={verdictDetails.orderStatus}
+              onChange={(e) =>
+                setVerdictDetails({
+                  ...verdictDetails,
+                  orderStatus: e.target.value,
+                })
+              }
             >
               <MenuItem value="">No Change</MenuItem>
 
@@ -176,11 +168,14 @@ const ComplaintItem = ({ complaint }) => {
           <FormControl fullWidth sx={{ mt: 2 }}>
             <InputLabel sx={{ top: "-7px" }}>Set Complaint Status</InputLabel>
             <Select
-              value={verdictDetails.setOrderStatus}
-              onChange={handleSetOrderStatusChange}
+              value={verdictDetails.complaintStatus}
+              onChange={(e) =>
+                setVerdictDetails({
+                  ...verdictDetails,
+                  complaintStatus: e.target.value,
+                })
+              }
             >
-              {/* <MenuItem value="">No Change</MenuItem> */}
-
               {Object.values(ComplaintStatusTypes).map((status) => (
                 <MenuItem key={status} value={status}>
                   {status}
@@ -192,7 +187,12 @@ const ComplaintItem = ({ complaint }) => {
             control={
               <Checkbox
                 checked={verdictDetails.setOrderStatus}
-                onChange={handleSetOrderStatusChange}
+                onChange={(e) =>
+                  setVerdictDetails({
+                    ...verdictDetails,
+                    setOrderStatus: e.target.checked,
+                  })
+                }
                 name="setOrderStatus"
               />
             }
@@ -200,19 +200,27 @@ const ComplaintItem = ({ complaint }) => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleVerdictDialogClose}>Cancel</Button>
           <Button
             variant="contained"
             color="primary"
-            onClick={handleMakeVerdictConfirm}
+            onClick={() => {
+              setOpenVerdictDialog(false);
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleMakeVerdict}
           >
             Make Verdict
           </Button>
         </DialogActions>
       </Dialog>
       <Dialog
-        open={showComplaintStatusDialog}
-        onClose={handleComplaintStatusDialogClose}
+        open={openChangeStatusDialog}
+        onClose={() => setOpenChangeStatusDialog(false)}
         BackdropComponent={Backdrop}
         BackdropProps={{
           sx: { backdropFilter: "blur(8px)" },
@@ -231,12 +239,7 @@ const ComplaintItem = ({ complaint }) => {
             </Select>
           </FormControl>
           <DialogActions>
-            <Button onClick={handleComplaintStatusDialogClose}>Cancel</Button>
-            <Button
-              variant="contained"
-              color="primary"
-              //   onClick={handleMakeVerdictConfirm}
-            >
+            <Button variant="contained" color="primary">
               set status
             </Button>
           </DialogActions>

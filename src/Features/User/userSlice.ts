@@ -5,6 +5,8 @@ import getAxiosInstance from "src/api/interceptors";
 export const fetchUserData = createAsyncThunk(
   "user/fetchUserData",
   async function (): Promise<IUser | null> {
+    if (!localStorage.getItem("accessToken")) return null;
+
     const response = await getAxiosInstance(
       import.meta.env.VITE_APP_API_URL
     ).get("/user");

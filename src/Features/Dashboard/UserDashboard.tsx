@@ -107,67 +107,78 @@ export default function UserDashboard() {
 
   return (
     <Container
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "75vh",
+      maxWidth="md"
+      sx={{
+        mt: 2,
       }}
     >
-      <Card
-        onClick={() => handleCardClick(false)}
-        style={{ width: 300, height: 100, margin: "0 auto" }}
+      <Typography variant="h4">
+        Welcome to the User Dashboard! Please select the account type you want
+        to create: customer or driver.
+      </Typography>
+      <Container
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "75vh",
+        }}
       >
-        <CardContent>
-          <Typography variant="h5" component="div">
-            Create customer account
-          </Typography>
-        </CardContent>
-      </Card>
-      <Card
-        onClick={() => handleCardClick(true)}
-        style={{ width: 300, height: 100, margin: "0 auto" }}
-      >
-        <CardContent>
-          <Typography variant="h5" component="div">
-            Create driver account
-          </Typography>
-        </CardContent>
-      </Card>
+        <Card
+          onClick={() => handleCardClick(false)}
+          style={{ width: 300, height: 100, margin: "0 auto" }}
+        >
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Create customer account
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card
+          onClick={() => handleCardClick(true)}
+          style={{ width: 300, height: 100, margin: "0 auto" }}
+        >
+          <CardContent>
+            <Typography variant="h5" component="div">
+              Create driver account
+            </Typography>
+          </CardContent>
+        </Card>
 
-      <Dialog open={openDialog} onClose={handleDialogClose}>
-        <DialogTitle>Confirmation</DialogTitle>
-        <DialogContent>
-          <Typography>Are you sure you want to create an account?</Typography>
-          {isDriverAccount && (
-            <>
-              <TextField
-                label="Driver License"
-                value={driverLicense}
-                onChange={(e) => setDriverLicense(e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-              {error && <Alert severity="error">{error}</Alert>}
-            </>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleContinueClick} color="primary">
-            Continue
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <Dialog open={openDialog} onClose={handleDialogClose}>
+          <DialogTitle>Confirmation</DialogTitle>
+          <DialogContent>
+            <Typography>Are you sure you want to create an account?</Typography>
+            {isDriverAccount && (
+              <>
+                <TextField
+                  label="Driver License"
+                  value={driverLicense}
+                  onChange={(e) => setDriverLicense(e.target.value)}
+                  fullWidth
+                  margin="normal"
+                />
+                {error && <Alert severity="error">{error}</Alert>}
+              </>
+            )}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDialogClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleContinueClick} color="primary">
+              Continue
+            </Button>
+          </DialogActions>
+        </Dialog>
 
-      <Snackbar
-        open={!!successMessage}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-        message={successMessage}
-      />
+        <Snackbar
+          open={!!successMessage}
+          autoHideDuration={6000}
+          onClose={handleSnackbarClose}
+          message={successMessage}
+        />
+      </Container>
     </Container>
   );
 }
